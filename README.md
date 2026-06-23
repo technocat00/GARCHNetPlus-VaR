@@ -33,6 +33,10 @@ For a 2.5% VaR level and 252 trading days, a calibrated model should produce rou
 
 exceptions per test window.
 
+### One-day-ahead VaR forecast paths
+
+![VaR forecast paths](assets/var_forecast_paths.png)
+
 ## Result
 Across four 252-day out-of-sample test windows, **GARCHNet++ reduced VaR breaches by 17.4%** compared with the paper-style Original GARCHNet baseline.
 
