@@ -80,6 +80,9 @@ exceptions per test window.
 
 ## Results visualizations
 
+##  Model Pipeline
+![GARCHNet++ pipeline](assets/model_pipeline.png)
+
 ### VaR exceptions by period
 
 ![VaR exceptions comparison](assets/var_exceptions_comparison.png)
