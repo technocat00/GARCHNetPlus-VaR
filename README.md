@@ -1,21 +1,6 @@
 # GARCHNet++: Leverage-Aware VaR and Expected Shortfall Forecasting
 
 This repository implements **GARCHNet++**, a risk-management project extending a paper-style **GARCHNet** Value-at-Risk forecasting baseline.
-
-## Main quantifiable result
-
-Across four 252-day out-of-sample test windows, **GARCHNet++ reduced VaR breaches by 17.4%** compared with the paper-style Original GARCHNet baseline.
-
-| Aggregate metric | Original GARCHNet | GARCHNet++ | Improvement |
-|---|---:|---:|---:|
-| VaR exceptions | 69 | 57 | **17.4% fewer** |
-| GPL score | 0.6143 | 0.5751 | **6.4% lower** |
-| LLF | 462.7179 | 398.9787 | **13.8% lower** |
-| CRLF | 62.6898 | 48.3467 | **22.9% lower** |
-| CFLF | 1162.3284 | 1126.6634 | **3.1% lower** |
-
-**Resume-style outcome:** Reduced **VaR breaches by 17.4%** and **GPL score by 6.4%** over the paper-style **Original GARCHNet** baseline across four 252-day out-of-sample test windows.
-
 ## Method overview
 
 ![GARCHNet++ pipeline](assets/model_pipeline.png)
@@ -40,36 +25,6 @@ x_t = \left[r_t,\; r_t^2,\; r_t^2 \mathbf{1}(r_t < 0)\right]
 
 The third feature captures the leverage effect: negative shocks often raise future risk more strongly than positive shocks of similar size.
 
-### Conditional variance forecast
-
-```math
-\sigma_t^2 = f_\theta(x_{t-p}, \ldots, x_{t-1})
-```
-
-### Value-at-Risk
-
-```math
-\operatorname{VaR}_{t,\alpha} = F_t^{-1}(\alpha)
-```
-
-For a zero-mean conditional return model:
-
-```math
-\operatorname{VaR}_{t,\alpha} = \sigma_t q_\alpha
-```
-
-### Expected Shortfall
-
-```math
-\operatorname{ES}_{t,\alpha} = \mathbb{E}\left[r_t \mid r_t < \operatorname{VaR}_{t,\alpha}\right]
-```
-
-### VaR exception indicator
-
-```math
-I_t = \mathbf{1}\left(r_t < \operatorname{VaR}_{t,\alpha}\right)
-```
-
 For a 2.5% VaR level and 252 trading days, a calibrated model should produce roughly:
 
 ```math
@@ -78,10 +33,18 @@ For a 2.5% VaR level and 252 trading days, a calibrated model should produce rou
 
 exceptions per test window.
 
-## Results visualizations
+## Result
+Across four 252-day out-of-sample test windows, **GARCHNet++ reduced VaR breaches by 17.4%** compared with the paper-style Original GARCHNet baseline.
 
-##  Model Pipeline
-![GARCHNet++ pipeline](assets/model_pipeline.png)
+| Aggregate metric | Original GARCHNet | GARCHNet++ | Improvement |
+|---|---:|---:|---:|
+| VaR exceptions | 69 | 57 | **17.4% fewer** |
+| GPL score | 0.6143 | 0.5751 | **6.4% lower** |
+| LLF | 462.7179 | 398.9787 | **13.8% lower** |
+| CRLF | 62.6898 | 48.3467 | **22.9% lower** |
+| CFLF | 1162.3284 | 1126.6634 | **3.1% lower** |
+
+## Results visualizations
 
 ### VaR exceptions by period
 
@@ -214,18 +177,6 @@ On Windows PowerShell, activate using:
 .\venv\Scripts\Activate.ps1
 ```
 
-## GitHub push
-
-```bash
-git init
-git add .
-git commit -m "Add GARCHNet++ VaR forecasting project"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git push -u origin main
-```
-
 ## Notes
 
 - The current reported results use SPY as a liquid S&P 500 proxy.
-- The strongest validated claim is improvement over Original GARCHNet, not universal dominance over all classical GARCH baselines.
